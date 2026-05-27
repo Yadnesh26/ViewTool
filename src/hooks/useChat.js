@@ -34,6 +34,8 @@ export const useChat = () => {
     const [searchQuery, setSearchQuery] = useState('');
     const [jumpIndex, setJumpIndex] = useState(null);
     const [currentSearchIndex, setCurrentSearchIndex] = useState(0);
+    const [pendingData, setPendingData] = useState(null);
+    const [primaryUser, setPrimaryUser] = useState(null);
 
     // Debounce search query to prevent UI freezing
     const debouncedSearchQuery = useDebounce(searchQuery, 300);
@@ -44,9 +46,10 @@ export const useChat = () => {
             
             if (file.name.endsWith('.zip')) {
                 const result = await processZipUpload(file);
-                setMessages(result.messages);
-                setSenders(getUniqueSenders(result.messages));
-                setIsLoaded(true);
+                setPendingData({
+                    messages: result.messages,
+                    senders: getUniqueSenders(result.messages)
+                });
             } else if (file.name.endsWith('.txt')) {
                 const text = await file.text();
                 // Use Web Worker for parsing large text files without blocking UI
@@ -54,9 +57,10 @@ export const useChat = () => {
                 worker.onmessage = (e) => {
                     const { success, messages: parsedMessages, senders: parsedSenders, error: workerError } = e.data;
                     if (success) {
-                        setMessages(parsedMessages);
-                        setSenders(parsedSenders);
-                        setIsLoaded(true);
+                        setPendingData({
+                            messages: parsedMessages,
+                            senders: parsedSenders
+                        });
                     } else {
                         setError(workerError || 'Failed to parse chat file.');
                     }
@@ -77,6 +81,15 @@ export const useChat = () => {
         }
     };
 
+    const handleSelectUser = (user) => {
+        if (!pendingData) return;
+        setPrimaryUser(user);
+        setMessages(pendingData.messages);
+        setSenders(pendingData.senders);
+        setIsLoaded(true);
+        setPendingData(null);
+    };
+
     const reset = () => {
         setMessages([]);
         setSenders([]);
@@ -85,6 +98,8 @@ export const useChat = () => {
         setSearchQuery('');
         setJumpIndex(null);
         setCurrentSearchIndex(0);
+        setPendingData(null);
+        setPrimaryUser(null);
     };
 
     const { groupedMessages, dateIndexMap, availableDates, searchResults } = useMemo(() => {
@@ -204,6 +219,9 @@ export const useChat = () => {
         handleNextSearchResult,
         handlePrevSearchResult,
         handleFileUpload,
-        reset
+        reset,
+        pendingData,
+        primaryUser,
+        handleSelectUser
     };
 };

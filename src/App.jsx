@@ -4,6 +4,7 @@ import AppLayout from './components/Layout/AppLayout';
 import Sidebar from './components/Sidebar/Sidebar';
 import ChatArea from './components/Chat/ChatArea';
 import UploadScreen from './components/Upload/UploadScreen';
+import UserSelectionScreen from './components/Upload/UserSelectionScreen';
 import './App.css';
 
 function App() {
@@ -22,10 +23,20 @@ function App() {
     handleNextSearchResult,
     handlePrevSearchResult,
     handleFileUpload,
-    senders
+    senders,
+    pendingData,
+    primaryUser,
+    handleSelectUser
   } = useChat();
 
   if (!isLoaded) {
+    if (pendingData) {
+      return (
+        <div className="app-container">
+          <UserSelectionScreen senders={pendingData.senders} onSelect={handleSelectUser} />
+        </div>
+      );
+    }
     return (
       <div className="app-container">
         <UploadScreen onUpload={handleFileUpload} error={error} />
@@ -57,6 +68,7 @@ function App() {
             searchQuery={searchQuery}
             onOpenSidebar={() => setIsSidebarOpen(true)}
             senders={senders}
+            primaryUser={primaryUser}
           />
         }
       />
