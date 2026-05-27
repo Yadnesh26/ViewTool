@@ -1,16 +1,44 @@
-# React + Vite
+# ViewTool - WhatsApp Chat Viewer
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+## Description
+A high-performance, responsive React application designed to parse, view, and analyze exported WhatsApp chats (`.txt` and `.zip` formats). ViewTool is built with speed and user experience in mind, allowing you to instantly load massive chat histories and navigate them seamlessly.
 
-Currently, two official plugins are available:
+## Features
+- 🚀 **Lightning Fast Parsing**: Uses Web Workers to parse massive text files in the background without freezing the UI.
+- 📜 **Virtual Scrolling**: Implemented with `react-virtuoso` to render hundreds of thousands of messages smoothly without lagging the browser.
+- 🔍 **WhatsApp-Style Search**: Search for keywords without losing the context of the conversation. Matching text is highlighted, and you can jump seamlessly between matches using Up/Down navigation.
+- 📅 **Smart Date Navigation**: Instantly jump to any specific date using a native calendar picker. If a date has no messages, the system automatically finds and jumps to the closest available date.
+- 🖼️ **Media Support**: Automatically detects and handles image, video, and audio attachments if included in the export.
+- 🎨 **Beautiful UI**: A dark-mode optimized, WhatsApp-style interface complete with message tails, sender colors, and checkmarks.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Getting Started
 
-## React Compiler
+### Prerequisites
+- [Node.js](https://nodejs.org/) (v18+)
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+### Installation
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Yadnesh26/ViewTool.git
+   cd ViewTool
+   ```
+2. Install dependencies:
+   ```bash
+   npm install
+   ```
+3. Start the development server:
+   ```bash
+   npm run dev
+   ```
+4. Open `http://localhost:5173/` in your browser.
 
-## Expanding the ESLint configuration
+## Usage
+1. Export a chat from WhatsApp (with or without media).
+2. Upload the `.txt` or `.zip` file into ViewTool.
+3. Use the search bar to find messages or the calendar to jump to specific dates.
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## Tech Stack
+- **Framework**: React 19 + Vite
+- **Virtualization**: `react-virtuoso`
+- **Icons**: `lucide-react`
+- **Parsing**: Native JS Web Workers
