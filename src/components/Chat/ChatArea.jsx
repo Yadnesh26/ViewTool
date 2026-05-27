@@ -3,7 +3,7 @@ import { Search, MoreVertical } from 'lucide-react';
 import { Virtuoso } from 'react-virtuoso';
 import MessageBubble from './MessageBubble';
 
-const ChatArea = ({ groupedMessages, jumpIndex, searchQuery }) => {
+const ChatArea = ({ groupedMessages, jumpIndex, searchQuery, onOpenSidebar }) => {
     const virtuosoRef = useRef(null);
 
     // Handle jumps to specific date index
@@ -82,7 +82,7 @@ const ChatArea = ({ groupedMessages, jumpIndex, searchQuery }) => {
                 </div>
                 
                 <div style={{ display: 'flex', gap: '20px', color: 'var(--wa-icon)' }}>
-                    <Search size={20} style={{ cursor: 'pointer' }} />
+                    <Search size={20} style={{ cursor: 'pointer' }} onClick={onOpenSidebar} />
                     <MoreVertical size={20} style={{ cursor: 'pointer' }} />
                 </div>
             </div>

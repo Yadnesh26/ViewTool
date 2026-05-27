@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useChat } from './hooks/useChat';
 import AppLayout from './components/Layout/AppLayout';
 import Sidebar from './components/Sidebar/Sidebar';
@@ -7,6 +7,7 @@ import UploadScreen from './components/Upload/UploadScreen';
 import './App.css';
 
 function App() {
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const {
     groupedMessages,
     availableDates,
@@ -34,6 +35,7 @@ function App() {
   return (
     <div className="app-container">
       <AppLayout 
+        isSidebarOpen={isSidebarOpen}
         sidebar={
           <Sidebar 
             searchQuery={searchQuery}
@@ -44,6 +46,7 @@ function App() {
             currentSearchIndex={currentSearchIndex}
             onNextSearch={handleNextSearchResult}
             onPrevSearch={handlePrevSearchResult}
+            onCloseSidebar={() => setIsSidebarOpen(false)}
           />
         }
         chatArea={
@@ -51,6 +54,7 @@ function App() {
             groupedMessages={groupedMessages} 
             jumpIndex={jumpIndex}
             searchQuery={searchQuery}
+            onOpenSidebar={() => setIsSidebarOpen(true)}
           />
         }
       />

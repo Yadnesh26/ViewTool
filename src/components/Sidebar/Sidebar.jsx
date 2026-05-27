@@ -1,5 +1,5 @@
 import React from 'react';
-import { Search, Calendar, ChevronUp, ChevronDown } from 'lucide-react';
+import { Search, Calendar, ChevronUp, ChevronDown, ArrowLeft } from 'lucide-react';
 
 const Sidebar = ({ 
     searchQuery, 
@@ -9,7 +9,8 @@ const Sidebar = ({
     searchResults, 
     currentSearchIndex, 
     onNextSearch, 
-    onPrevSearch 
+    onPrevSearch,
+    onCloseSidebar
 }) => {
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%', backgroundColor: 'var(--wa-bg-panel)', overflow: 'hidden' }}>
@@ -21,10 +22,18 @@ const Sidebar = ({
                 backgroundColor: 'var(--wa-bg-panel-header)', 
                 display: 'flex', 
                 alignItems: 'center', 
-                justifyContent: 'space-between',
                 padding: '10px 16px',
-                borderBottom: '1px solid var(--wa-border)'
+                borderBottom: '1px solid var(--wa-border)',
+                gap: '15px'
             }}>
+                <div className="mobile-only" style={{ display: 'flex', alignItems: 'center' }}>
+                    <ArrowLeft 
+                        size={24} 
+                        color="var(--wa-icon)" 
+                        style={{ cursor: 'pointer' }}
+                        onClick={onCloseSidebar}
+                    />
+                </div>
                 <div style={{ 
                     width: '40px', 
                     height: '40px', 
@@ -35,7 +44,8 @@ const Sidebar = ({
                     justifyContent: 'center',
                     color: 'white',
                     fontWeight: 'bold',
-                    fontSize: '14px'
+                    fontSize: '14px',
+                    marginLeft: 'auto'
                 }}>ME</div>
             </div>
 
