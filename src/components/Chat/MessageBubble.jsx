@@ -1,7 +1,7 @@
 import React from 'react';
 import { CheckCheck } from 'lucide-react';
 
-const MessageBubble = ({ message, isFirstInGroup, searchQuery }) => {
+const MessageBubble = ({ message, isFirstInGroup, searchQuery, isSent }) => {
     
     // System messages (e.g. date changes or encryption notices)
     if (message.isSystem) {
@@ -23,18 +23,15 @@ const MessageBubble = ({ message, isFirstInGroup, searchQuery }) => {
         );
     }
 
-    // Attempt to determine if "sent" or "received" based on the sender name
+    const align = isSent ? 'flex-end' : 'flex-start';
+    const bgColor = isSent ? 'var(--wa-message-out)' : 'var(--wa-message-in)';
+    
+    // Colors for sender name based on hash
     let hash = 0;
     const sender = message.sender || '';
     for (let i = 0; i < sender.length; i++) {
         hash = sender.charCodeAt(i) + ((hash << 5) - hash);
     }
-    const isSent = (hash % 2 === 0);
-
-    const align = isSent ? 'flex-end' : 'flex-start';
-    const bgColor = isSent ? 'var(--wa-message-out)' : 'var(--wa-message-in)';
-    
-    // Colors for sender name
     const h = Math.abs(hash) % 360;
     const senderColor = `hsl(${h}, 70%, 60%)`;
 

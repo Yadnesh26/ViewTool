@@ -3,7 +3,7 @@ import { Search, MoreVertical } from 'lucide-react';
 import { Virtuoso } from 'react-virtuoso';
 import MessageBubble from './MessageBubble';
 
-const ChatArea = ({ groupedMessages, jumpIndex, searchQuery, onOpenSidebar }) => {
+const ChatArea = ({ groupedMessages, jumpIndex, searchQuery, onOpenSidebar, senders }) => {
     const virtuosoRef = useRef(null);
 
     // Handle jumps to specific date index
@@ -35,11 +35,17 @@ const ChatArea = ({ groupedMessages, jumpIndex, searchQuery, onOpenSidebar }) =>
                 </div>
             );
         } else {
+            // Determine if message is sent by the primary user (right side)
+            // We assume the first person in the chat is the "other" person (left side).
+            // Everyone else (or just the second person) is "me" (right side).
+            const isSent = (senders && senders.length > 0) ? (item.data.sender !== senders[0]) : false;
+
             return (
                 <MessageBubble 
                     message={item.data} 
                     isFirstInGroup={item.isFirstInGroup} 
                     searchQuery={searchQuery}
+                    isSent={isSent}
                 />
             );
         }

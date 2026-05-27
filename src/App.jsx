@@ -21,7 +21,8 @@ function App() {
     currentSearchIndex,
     handleNextSearchResult,
     handlePrevSearchResult,
-    handleFileUpload
+    handleFileUpload,
+    senders
   } = useChat();
 
   if (!isLoaded) {
@@ -55,6 +56,7 @@ function App() {
             jumpIndex={jumpIndex}
             searchQuery={searchQuery}
             onOpenSidebar={() => setIsSidebarOpen(true)}
+            senders={senders}
           />
         }
       />
