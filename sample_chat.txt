@@ -1,0 +1,14 @@
+[12/05/26, 10:30:22 PM] Yadnesh: Hello there!
+[12/05/26, 10:30:45 PM] Rahul: Hi Yadnesh, how are you?
+[12/05/26, 10:31:10 PM] Yadnesh: I'm good. Did you see the new design?
+[12/05/26, 10:31:30 PM] Rahul: Yes! It looks amazing. Very close to the real thing.
+[12/05/26, 10:35:10 PM] Yadnesh: I am going to attach a file now.
+[12/05/26, 10:35:15 PM] Yadnesh: sample_image.jpg (file attached)
+[12/05/26, 10:36:00 PM] Rahul: Nice, I see the attachment placeholder.
+[12/05/26, 10:40:00 PM] Messages and calls are end-to-end encrypted. No one outside of this chat, not even WhatsApp, can read or listen to them.
+[13/05/26, 9:00:00 AM] Yadnesh: Good morning!
+[13/05/26, 9:05:00 AM] Rahul: Morning!
+[13/05/26, 9:06:00 AM] Rahul: This is a multiline message
+testing how it
+renders in the UI.
+[13/05/26, 9:10:00 AM] Yadnesh: Looks perfect.
